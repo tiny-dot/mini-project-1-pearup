@@ -3,7 +3,6 @@ package SSF.mini_project_1.Controllers;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -57,6 +56,12 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.CREATED)
                             .body(message);  
     }
+//     @PostMapping("/createGroup")
+//     public String createGroup(@ModelAttribute Group group, Model model) {
+//         String groupID = grpSvc.createGroup(group);
+//         model.addAttribute("groupID", groupID);
+//         return "redirect:/leadersPage/" + groupID;  // Redirecting to leader's page
+// }
 
     
     @GetMapping("/{groupID}")
@@ -75,12 +80,8 @@ public class UserController {
 
     //shuffle and assign pairs
     @PostMapping("/{groupID}/shuffle")
-    public String shuffleMembers(@RequestParam @PathVariable String groupID, Model model){
+    public String shuffleMembers(@PathVariable String groupID, Model model){
         Group group = grpSvc.getGroupById(groupID);
-        if(group == null){
-            model.addAttribute("not-found", "not-found");
-            return "not-found";
-        }
 
         List<Member> ogMembers = group.getMembers();
         Collections.shuffle(ogMembers);
@@ -227,5 +228,3 @@ public class UserController {
         return "profile";
 }
 }
-
-
