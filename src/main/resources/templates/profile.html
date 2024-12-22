@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+</head>
+<body>
+    <h1>Member Profile</h1>
+
+    <!-- Display Member Details -->
+    <div th:if="${member != null}">
+        <p><strong>Name:</strong> <span th:text="${member.name}">Name</span></p>
+        <p><strong>Group ID:</strong> <span th:text="${groupID}">Group ID</span></p>
+        <p><strong>Wishlist:</strong> <span th:text="${member.wishlist}">Wishlist</span></p>
+        
+        <!-- Display Secret Santa -->
+        <p><strong>Secret Santa:</strong> 
+            <span th:text="${member.secretsanta != null ? member.secretsanta : 'Not assigned yet'}">
+                Secret Santa
+            </span>
+        </p>
+    </div>
+
+    <!-- Wishlist Update Form -->
+    <div th:if="${member != null}">
+        <form th:action="@{'/' + ${groupID} + '/profile/' + ${member.name} + '/update'}" method="post">
+            <label for="wishlist">Update Wishlist:</label>
+            <textarea id="wishlist" name="wishlist" rows="5" cols="30"
+                      th:text="${member.wishlist}"></textarea>
+            <button type="submit">Update</button>
+        </form>
+    </div>
+
+    <!-- Display Fallback Message -->
+    <div th:if="${member == null}">
+        <p>Member information is not available.</p>
+    </div>
+
+    <a href="/">Back to Home</a>
+</body>
+</html>

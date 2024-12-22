@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Join an Existing Group</h1>
+
+    <!-- Form to input group ID and member name -->
+    <form action="/joinGroup" method="post">
+        <label for="groupID">Group ID:</label>
+        <input type="text" id="groupID" name="groupID" required><br><br>
+
+        <label for="name">Your Name:</label>
+        <input type="text" id="name" name="name" required><br><br>
+
+        <button type="submit">Join Group</button>
+    </form>
+
+    <p><a href="/">Back to Home</a></p>
+</body>
+</html>
