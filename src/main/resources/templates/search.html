@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>search</title>
+</head>
+<body>
+    <h1>Gift ideas</h1>
+    <h2>You searched for <code data-th-text="${keyword}"></code></h2>
+
+    <ul>
+        <li data-th-each="i:${items}">
+            <p data-th-text="${i.title}"></p>
+            <p data-th-text="${i.categoryName}"></p>
+            <p data-th-text="${i.galleryURL}"></p>
+            <p data-th-text="${i.itemURL}"></p>
+            <p data-th-text="${i.price}"></p>
+        </li>
+    </ul>
+</body>
+</html>

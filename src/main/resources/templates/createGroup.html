@@ -7,14 +7,53 @@
 </head>
 <body>
     <h1>Create a new group here:</h1>
-    <form action="/createGroup" method="post" data-th-object="${group}">
-        <label for="theme">Event Theme:</label>
-        <input type="text" id="theme" th:field="*{theme}" required><br><br>
-        
-        <label for="eventDate">Event Date:</label>
-        <input type="date" id="eventDate" th:field="*{eventDate}" required><br><br>
-        
-        <button type="submit">Create Group</button>
+    <form method="POST" action="/createGroup" data-th-object="${group}">
+        <table>
+            <tr>
+                <td> Event Theme: </td>
+                <td>
+                    <input type="text" name="theme" data-th-field="*{theme}">
+                </td>
+                <td>
+                    <p data-th-if="*{#fields.hasErrors('theme')}" data-th-errors="*{theme}"
+                            class="error"> </p>
+                </td>
+            </tr>
+            <tr>
+                <td> Event Date: </td>
+                <td>
+                    <input type="date" name="eventDate" placeholder="Date must be in present/future"
+                            data-th-field="*{eventDate}">
+                </td>
+                <td>
+                    <p data-th-if="*{#fields.hasErrors('eventDate')}" data-th-errors="*{eventDate}"
+                            class="error"> </p>
+                </td>
+            </tr>
+        </table>
+            <button type="submit">Create Group</button>
+    </form>
+
+    <br><br>
+    
+
+    <form method="GET" action="/getgroup">
+        <h2>Already have a group? Enter your group ID:</h2>
+        <table>
+            <tr>
+                <td>group id:</td>
+                <td>
+                    <input type="text" name="groupid">
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <button type="submit">submit</button>
+                </td>
+            </tr>
+        </table>
+
     </form>
 
 </body>

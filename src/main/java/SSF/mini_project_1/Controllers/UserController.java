@@ -10,18 +10,22 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.MultiValueMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
-
+import org.springframework.web.servlet.ModelAndView;
 
 import SSF.mini_project_1.Models.Group;
 import SSF.mini_project_1.Models.Member;
 import SSF.mini_project_1.Services.GroupsService;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.PositiveOrZero;
 
 
 @Controller
@@ -44,42 +48,63 @@ public class UserController {
     }
 
     //do smth about thissss
+    // @PostMapping("/createGroup")
+    // public ResponseEntity<String> newGroup(@ModelAttribute Group group) {
+    //     // Create the group and get the groupID
+    //     String groupID = grpSvc.createGroup(group);
+
+    //     // to print out the groupID
+    //     String message = "Group successfully created. Your group ID is: " + groupID;
+
+    //     return ResponseEntity.ok(message);
+    // }
+    //createGroup w/o responseEntity
+
     @PostMapping("/createGroup")
-    public ResponseEntity<String> newGroup(@ModelAttribute Group group) {
-        // Create the group and get the groupID
-        String groupID = grpSvc.createGroup(group);
+    public String groupCreated(@Valid @ModelAttribute("group") Group group, BindingResult bindings, @RequestBody MultiValueMap<String, String> form, Model model){
+       System.out.printf("---bindings: %b\n," , bindings.hasErrors());
 
-        // Prepare the response message with the groupID
-        String message = "Group successfully created. Your group ID is: " + groupID;
-
-        // Return a ResponseEntity with a success message and the groupID
-        return ResponseEntity.status(HttpStatus.CREATED)
-                            .body(message);  
-    }
-//     @PostMapping("/createGroup")
-//     public String createGroup(@ModelAttribute Group group, Model model) {
-//         String groupID = grpSvc.createGroup(group);
-//         model.addAttribute("groupID", groupID);
-//         return "redirect:/leadersPage/" + groupID;  // Redirecting to leader's page
-// }
-
-    
-    @GetMapping("/{groupID}")
-    public String leadersPage(@PathVariable String groupID, Model model) {
-        // Get the group by ID
-        Group group = grpSvc.getGroupById(groupID);
+        if(bindings.hasErrors())
+            return "createGroup";
         
-        if (group == null) {
-            model.addAttribute("error", "Group not found");
-            return "error"; // Handle the case when group is not found
+        FieldError nameError = new FieldError("group", "theme", "Please include a theme");
+        FieldError dateError = new FieldError("group", "eventDate", "Date must be in the future");
+    
+        bindings.addError(nameError);
+        bindings.addError(dateError);
+
+        System.out.println(group.toString());
+        String groupID = grpSvc.createGroup(group);
+        System.out.println(groupID);
+        model.addAttribute("groupID", groupID);
+        model.addAttribute("group", group);
+       
+        return "getID";
         }
 
-        model.addAttribute("group", group);  // Add group details to the model
-        return "leadersPage";  // Return the leader's group page view
-    }
 
-    //shuffle and assign pairs
-    @PostMapping("/{groupID}/shuffle")
+    @GetMapping("/getgroup")
+    public String getGroup(
+        @RequestParam String groupid,
+        Model model
+    ){
+        Group group = grpSvc.getGroupById(groupid);
+
+        model.addAttribute("group", group);  
+        return "leadersPage";  
+    }
+    
+    // @GetMapping("/{groupID}")
+    // public String leadersPage(@PathVariable String groupID, Model model) {
+    //     // Get the group by ID
+    //     Group group = grpSvc.getGroupById(groupID);
+
+    //     model.addAttribute("group", group);  
+    //     return "leadersPage";  
+    // }
+
+    //shuffle
+    @PostMapping("{groupID}/shuffle")
     public String shuffleMembers(@PathVariable String groupID, Model model){
         Group group = grpSvc.getGroupById(groupID);
 
@@ -107,12 +132,41 @@ public class UserController {
 
         grpSvc.updateGroup(group);
 
-        //model.addAttribute("success", "secret santa pairs have been assigned");
         model.addAttribute("group", group);
         return "leadersPage";
-        
-
     }
+    //shuffle and assign pairs
+    // @PostMapping("getgroup/{groupID}/shuffle")
+    // public String shuffleMembers(@PathVariable String groupID, Model model){
+    //     Group group = grpSvc.getGroupById(groupID);
+
+    //     List<Member> ogMembers = group.getMembers();
+    //     Collections.shuffle(ogMembers);
+
+    //     //to make sure they dont get themselves
+    //     List<Member> shuffledMembers=new LinkedList<>(ogMembers); //create new list
+
+    //     //assign pairs
+    //     for(int i=0;i<ogMembers.size();i++){
+    //         Member santa = ogMembers.get(i);
+    //         Member receiver = shuffledMembers.get(i);
+
+    //         if(santa.equals(receiver)){
+    //             Collections.shuffle(shuffledMembers);  
+    //             i=-1;
+    //             continue;
+        
+    //         } else {
+    //             //assign santa
+    //             santa.setSecretsanta(receiver.getName());
+    //         }
+    //     }
+
+    //     grpSvc.updateGroup(group);
+
+    //     model.addAttribute("group", group);
+    //     return "leadersPage";
+    // }
 
 
     /*--------------------------JOIN EXISTING GROUP------------------------------- */
@@ -128,14 +182,10 @@ public class UserController {
             String groupID = form.getFirst("groupID");
             String name = form.getFirst("name");
 
-            //check if group exists
+            //get group
             Group group = grpSvc.getGroupById(groupID);
-            if (group == null) {
-                model.addAttribute("error", "Group not found");
-                return "error"; // Or redirect to an error page if group doesn't exist
-            }
 
-            //check if member exists
+            //find the member in the group
             Member member = null;
             for (Member m : group.getMembers()) {
                 if (m.getName().equals(name)) {
@@ -143,16 +193,17 @@ public class UserController {
                     break; // Stop searching once the member is found
                 }
             }
-
+            //if no current member, create and add to 
             if(member==null){
                 //add member to group
-                Member me = new Member();
-                me.setName(name);
-                grpSvc.addMembersToGroup(groupID, me);
-                return "redirect:/" + groupID + "/profile/" + name;
-            } else{
-                return "redirect:/" + groupID + "/profile/" + name;
-            }
+                member = new Member();
+                member.setName(name);
+                grpSvc.addMembersToGroup(groupID, member);
+            } 
+            model.addAttribute("groupID", groupID);
+            model.addAttribute("member", member);
+            return "profile";
+
         }catch (Exception e){
             e.printStackTrace();
             return "joinGroup";
@@ -166,10 +217,10 @@ public class UserController {
         //get the group by the given ID
         Group group = grpSvc.getGroupById(groupID);
         
-        if(group==null){
-            model.addAttribute("not-found", "error");
-            return "not-found";
-        }
+        // if(group==null){
+        //     model.addAttribute("not-found", "error");
+        //     return "not-found";
+        // }
 
         //in this group, find the member
         List<Member> groupMembers = group.getMembers();
@@ -201,10 +252,6 @@ public class UserController {
 
         // Get the group
         Group group = grpSvc.getGroupById(groupID);
-        if (group == null) {
-            model.addAttribute("error", "Group not found");
-            return "not-found"; // Handle the case when group is not found
-        }
 
         // Update member list
         List<Member> members = group.getMembers();
@@ -222,8 +269,7 @@ public class UserController {
             model.addAttribute("group", group);
             model.addAttribute("member", member);
         } else {
-            model.addAttribute("error", "Member not found");
-            return "member-not-found";  // If member is not found
+            return "member not found";
         }
         return "profile";
 }

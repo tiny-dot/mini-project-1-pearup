@@ -25,6 +25,7 @@ public class GroupsService {
     public String createGroup(Group group){
         String groupID = UUID.randomUUID().toString().substring(0,8);
         group.setGroupID(groupID);
+        System.out.println(group.toString());
 
         grpRepo.saveGroup(group);
 
@@ -83,21 +84,11 @@ public class GroupsService {
         } catch (Exception e){e.printStackTrace();}
     }
 
-    // //get specific member
-    // public Member getMember(Group group, String name){
-    //     if(group == null || group.getMembers()==null){return null;}
-    //     for(Member member:group.getMembers()){
-    //         if(member.getName().equals(name)){return member;}
-    //     }
-    //     return null;
-    // }
-
+   
     //update secret santa
     public void updateSecretsanta(String groupID, String name, String secretsanta) {
         Group group = grpRepo.getGroupByID(groupID);
-        // if(group!=null){
-        //     Member member = getMember(group,name);
-        // }
+        
         Member member = null;
         for (Member m : group.getMembers()) {
             if (m.getName().equals(name)) {
@@ -108,7 +99,7 @@ public class GroupsService {
         }
         grpRepo.saveGroup(group);
     }
-    // Shuffle the members and assign Secret Santa
+    // Shuffle the members and assign Secret Santa - in controller now, to remove
     public void shuffleSecretSanta(Group group) {
         List<Member> members = group.getMembers();
 

@@ -15,12 +15,11 @@ public class Group {
     private String groupID;
 
     @NotNull (message = "please enter a theme")
-    @Size(min=2, max=50)
     private String theme;
 
     @DateTimeFormat(pattern="yyyy-MM-dd")
     @FutureOrPresent
-    private String eventDate;
+    private Date eventDate;
     
     private List<Member> members;
 
@@ -36,24 +35,24 @@ public class Group {
     public void setTheme(String theme) {
         this.theme = theme;
     }
-    public String getEventDate() {
-        return eventDate;
-    }
-    public void setEventDate(String eventDate) {
-        this.eventDate = eventDate;
-    }
-    
-    @Override
-    public String toString() {
-        return "Group [groupID=" + groupID + ", theme=" + theme + ", eventDate=" + eventDate + ", members=" + members
-                + "]";
-    }
     public List<Member> getMembers() {
         return members;
     }
     public void setMembers(List<Member> members) {
         this.members = members;
     }
+    public Date getEventDate() {
+        return eventDate;
+    }
+    public void setEventDate(Date eventDate) {
+        this.eventDate = eventDate;
+    }
+    @Override
+    public String toString() {
+        return "Group [groupID=" + groupID + ", theme=" + theme + ", eventDate=" + eventDate + ", members=" + members
+                + "]";
+    }
+   
 
     
     

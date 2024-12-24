@@ -9,25 +9,22 @@
     <h1>Group Details</h1>
 
     <!-- Display Group Information -->
-    <p><strong>Group ID:</strong> <span th:text="${group.groupID}"></span></p>
-    <p><strong>Theme:</strong> <span th:text="${group.theme}"></span></p>
-    <p><strong>Event Date:</strong> <span th:text="${group.eventDate}"></span></p>
+    <p><strong>Group ID:</strong> <span data-th-text="${group.groupID}"></span></p>
+    <p><strong>Theme:</strong> <span data-th-text="${group.theme}"></span></p>
+    <p><strong>Event Date:</strong> <span data-th-text="${group.eventDate}"></span></p>
 
     <h2>Members List:</h2>
     <ul>
-        <li th:each="member : ${group.members}">
-            <p th:text="${member.name}">Member Name</p>
-            <p><strong>Secret Santa:</strong> <span th:text="${member.secretsanta}">Secret Santa Name</span></p>
+        <li data-th-each="member : ${group.members}">
+            <p data-th-text="${member.name}">Member Name</p>
+            <p><strong>Secret Santa:</strong> <span data-th-text="${member.secretsanta}">Secret Santa Name</span></p>
         </li>
     </ul>
 
     <!-- Button to Shuffle the List -->
-    <form th:action="@{/{groupID}/shuffle(groupID=${group.groupID})}" method="post">
+    <form th:action="@{'/' + ${group.groupID} + '/shuffle'}" method="post">
         <button type="submit">Shuffle Members</button>
     </form>
-
-    <p th:if="${success}" style="color: green;">${success}</p>
-    <p th:if="${error}" style="color: red;">${error}</p>
 
     <a href="/">Back to Home</a>
 </body>

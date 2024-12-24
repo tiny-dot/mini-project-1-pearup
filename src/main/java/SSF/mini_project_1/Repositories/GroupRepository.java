@@ -8,6 +8,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -16,12 +17,17 @@ import org.springframework.data.redis.core.ListOperations;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Repository;
 
+
 import SSF.mini_project_1.Models.Group;
 import SSF.mini_project_1.Models.Member;
+import static SSF.mini_project_1.Constants.conversions.*;
+
 import jakarta.json.Json;
 import jakarta.json.JsonObject;
 import jakarta.json.JsonObjectBuilder;
 import jakarta.json.JsonReader;
+
+
 
 @Repository
 public class GroupRepository {
@@ -36,10 +42,12 @@ public class GroupRepository {
         Map<String,Object> values = new HashMap<>();
         values.put("id", group.getGroupID());
         values.put("theme", group.getTheme());
-        values.put("eventDate", group.getEventDate());
+        //save as string 
+        values.put("eventDate", String.valueOf(group.getEventDate().getTime()));
         
+       
         hashOps.putAll(group.getGroupID(), values);
-
+       
         //handle members list(need new key)
         String membersKey=group.getGroupID()+"member";
         List<Member> members = group.getMembers();
@@ -50,9 +58,13 @@ public class GroupRepository {
         for(Member member: members){
             //handle nulls
             JsonObjectBuilder jBuilder=Json.createObjectBuilder();
-            if(member.getName()!=null){jBuilder.add("name", member.getName());}
-            if(member.getWishlist()!=null){jBuilder.add("wishlist",member.getWishlist());}
-            if(member.getSecretsanta()!=null){jBuilder.add("secretsanta", member.getSecretsanta());}
+            if(member.getName()!=null){
+                jBuilder.add("name", member.getName());}
+            if(member.getWishlist()!=null){
+                jBuilder.add("wishlist",member.getWishlist());}
+            if(member.getSecretsanta()!=null){
+                jBuilder.add("secretsanta", member.getSecretsanta());}
+
             //convert java object to json object
             JsonObject memberInJson = jBuilder.build();
             String memberAsString = memberInJson.toString();
@@ -68,14 +80,20 @@ public class GroupRepository {
 
         //group
         Map<String,Object> group = hashOps.entries(id);
+        //System.out.println("error here");
         
         if(group.isEmpty()) return null;
 
         Group grp = new Group();
         grp.setGroupID(id);
         grp.setTheme(group.get("theme").toString());
-        grp.setEventDate(group.get("eventDate").toString());
         
+        //convert to Date
+        Long fromObj= Long.valueOf((String)group.get("eventDate"));
+        Date date = new Date(fromObj);
+        grp.setEventDate(date);
+        
+
         //get members list
         String membersKey = id + "member";
         List<Object> rawMembers = listOps.range(membersKey, 0, -1);
@@ -128,7 +146,7 @@ public class GroupRepository {
         if (group != null && group.getGroupID() != null) {
             Map<String, Object> values = new HashMap<>();
             values.put("theme", group.getTheme());
-            values.put("eventDate", group.getEventDate());
+            values.put("eventDate",  String.valueOf(group.getEventDate().getTime()));
             
             // Update group details in Redis hash
             hashOps.putAll(group.getGroupID(), values);
@@ -165,12 +183,12 @@ public class GroupRepository {
         }
     }
 
-    // Optionally add a method to add a single member to the group
-    public void addMemberToGroup(String groupID, String memberName) {
-        String membersKey = groupID + "members";
-        ListOperations<String, Object> listOps = template.opsForList();
-        listOps.rightPush(groupID, memberName);  // Add member to the list
-    }
+    // // Optionally add a method to add a single member to the group
+    // public void addMemberToGroup(String groupID, String memberName) {
+    //     String membersKey = groupID + "members";
+    //     ListOperations<String, Object> listOps = template.opsForList();
+    //     listOps.rightPush(groupID, memberName);  // Add member to the list
+    // }
 
     
 }
