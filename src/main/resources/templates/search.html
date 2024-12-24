@@ -6,17 +6,17 @@
     <title>search</title>
 </head>
 <body>
-    <h1>Gift ideas</h1>
-    <h2>You searched for <code data-th-text="${keyword}"></code></h2>
+    <h1>Event ideas</h1>
+    <h2>Here are some suggestions for: <code data-th-text="${keyword}"></code></h2>
 
     <ul>
-        <li data-th-each="i:${items}">
-            <p data-th-text="${i.title}"></p>
-            <p data-th-text="${i.categoryName}"></p>
-            <p data-th-text="${i.galleryURL}"></p>
-            <p data-th-text="${i.itemURL}"></p>
-            <p data-th-text="${i.price}"></p>
+        <li data-th-each="i:${events}">
+            <p data-th-text="${i.name}"></p>
+            <p data-th-text="${i.type}"></p>
+            <p data-th-text="${i.eventURL}"></p>
         </li>
     </ul>
+
+    <p data-th-if="${#lists.isEmpty(events)}">No events found matching your search criteria.</p>
 </body>
 </html>

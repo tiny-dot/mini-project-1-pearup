@@ -6,9 +6,9 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Need gift ideas? Search here!</h1>
+    <h1>Need event ideas? Search here!</h1>
 
-    <form method="GET" action="/searchForm">
+    <form method="POST" action="/searchForm">
     
         <table>
             <tr>
@@ -16,8 +16,8 @@
                 <td><input type="text" name="keyword"></td>
             </tr>
             <tr>
-                <td>Category:</td>
-                <td><input type="text" name="categoryName"></td>
+                <td>Country:</td>
+                <td><input type="text" name="locale"></td>
             </tr>
         </table>
     <button type="submit"> Search </button>
