@@ -98,6 +98,15 @@ public class GroupsService {
         }
         grpRepo.saveGroup(group);
     }
+
+    //groupID dont exist
+    public boolean checkID(String groupID){
+        if(grpRepo.checkID(groupID)){
+            return true;
+        } return false;
+    }
 }
+
+
 
 

@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -36,12 +36,13 @@ public class eventController {
         String locale= search.getFirst("locale");
 
         eventSearch es = new eventSearch(keyword, locale);
-        System.out.println("Received keyword: " + keyword + ", locale: " + locale);  // Log the parameters
+        //System.out.println("Received keyword: " + keyword + ", locale: " + locale); 
 
         List<Events> eventList = eventSvc.getEvents(es);
 
         mav.setViewName("search");
         mav.addObject("keyword", keyword);
+        mav.addObject("locale", locale);
         mav.addObject("events", eventList);
 
         return mav;

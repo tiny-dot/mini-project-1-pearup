@@ -181,7 +181,7 @@ public class GroupRepository {
                 }
             }
         }
-    }
+
 
     // // Optionally add a method to add a single member to the group
     // public void addMemberToGroup(String groupID, String memberName) {
@@ -190,5 +190,11 @@ public class GroupRepository {
     //     listOps.rightPush(groupID, memberName);  // Add member to the list
     // }
 
-    
+    }
+
+    //check member existence
+    public boolean checkID(String groupID){
+        HashOperations<String, String, Object> hashOps = template.opsForHash();
+        return template.hasKey(groupID);
+    }
 }
