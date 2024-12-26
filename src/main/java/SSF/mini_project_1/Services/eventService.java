@@ -29,7 +29,7 @@ public class eventService {
     public List<Events> getEvents(eventSearch search){
         String url = UriComponentsBuilder.fromUriString(EVENT_URL)
                                         .queryParam("apikey", apikey)
-                                        .queryParam("keywords", search.keyword())
+                                        .queryParam("classificationName", search.classificationName())
                                         .queryParam("locale", search.locale())
                                         .toUriString();
 

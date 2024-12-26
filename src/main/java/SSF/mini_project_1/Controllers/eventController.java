@@ -30,9 +30,9 @@ public class eventController {
 
     @PostMapping("/searchForm")
     public ModelAndView getSearch(@RequestParam MultiValueMap<String,String> search){
-        System.out.println("GET /search method has been called!");
+        //testing: System.out.println("GET /search method has been called!");
         ModelAndView mav = new ModelAndView();
-        String keyword= search.getFirst("keyword");
+        String keyword= search.getFirst("classificationName");
         String locale= search.getFirst("locale");
 
         eventSearch es = new eventSearch(keyword, locale);

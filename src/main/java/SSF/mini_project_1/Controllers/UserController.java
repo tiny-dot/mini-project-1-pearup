@@ -47,31 +47,21 @@ public class UserController {
         return "createGroup";
     }
 
-    //do smth about thissss
-    // @PostMapping("/createGroup")
-    // public ResponseEntity<String> newGroup(@ModelAttribute Group group) {
-    //     // Create the group and get the groupID
-    //     String groupID = grpSvc.createGroup(group);
-
-    //     // to print out the groupID
-    //     String message = "Group successfully created. Your group ID is: " + groupID;
-
-    //     return ResponseEntity.ok(message);
-    // }
-    //createGroup w/o responseEntity
 
     @PostMapping("/createGroup")
     public String groupCreated(@Valid @ModelAttribute("group") Group group, BindingResult bindings, @RequestBody MultiValueMap<String, String> form, Model model){
        System.out.printf("---bindings: %b\n," , bindings.hasErrors());
 
-        if(bindings.hasErrors())
-            return "createGroup";
+        if(bindings.hasErrors()){
+            FieldError nameError = new FieldError("group", "theme", "Please include a theme");
+            FieldError dateError = new FieldError("group", "eventDate", "Date must be in the future");
         
-        FieldError nameError = new FieldError("group", "theme", "Please include a theme");
-        FieldError dateError = new FieldError("group", "eventDate", "Date must be in the future");
-    
-        bindings.addError(nameError);
-        bindings.addError(dateError);
+            bindings.addError(nameError);
+            bindings.addError(dateError);
+
+            return "createGroup";
+        }
+                   
 
         System.out.println(group.toString());
         String groupID = grpSvc.createGroup(group);
