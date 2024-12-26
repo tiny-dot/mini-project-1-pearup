@@ -223,9 +223,9 @@ public class UserController {
             }
         }
 
-        if(member == null){
-            model.addAttribute("error", "Member not found");
-            return "member-not-found";}
+        // if(member == null){
+        //     model.addAttribute("error", "Member not found");
+        //     return "member-not-found";}
         //bind to model
         model.addAttribute("groupID", groupID);
         model.addAttribute("member", member);
@@ -257,7 +257,7 @@ public class UserController {
             model.addAttribute("group", group);
             model.addAttribute("member", member);
         } else {
-            return "member not found";
+            return null;
         }
         return "profile";
 }
