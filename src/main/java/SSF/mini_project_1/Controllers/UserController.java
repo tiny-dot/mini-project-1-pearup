@@ -94,7 +94,7 @@ public class UserController {
     // }
 
     //shuffle
-    @PostMapping("{groupID}/shuffle")
+    @PostMapping("/getgroup/{groupID}/shuffle")
     public String shuffleMembers(@PathVariable String groupID, Model model){
         Group group = grpSvc.getGroupById(groupID);
 
@@ -116,7 +116,7 @@ public class UserController {
         
             } else {
                 //assign santa
-                santa.setSecretsanta(receiver.getName());
+                santa.setEventPlanner(receiver.getName());
             }
         }
 
@@ -125,6 +125,8 @@ public class UserController {
         model.addAttribute("group", group);
         return "leadersPage";
     }
+
+   
     //shuffle and assign pairs
     // @PostMapping("getgroup/{groupID}/shuffle")
     // public String shuffleMembers(@PathVariable String groupID, Model model){
@@ -201,16 +203,12 @@ public class UserController {
     }
 
 
-    //member profile page - dont need request param/request body??
-    @GetMapping("/{groupID}/profile/{name}")
+    
+    @GetMapping("/group/{groupID}/profile/{name}")
     public String profile(@PathVariable(name="groupID") String groupID, @PathVariable(name="name") String name, Model model){
         //get the group by the given ID
         Group group = grpSvc.getGroupById(groupID);
         
-        // if(group==null){
-        //     model.addAttribute("not-found", "error");
-        //     return "not-found";
-        // }
 
         //in this group, find the member
         List<Member> groupMembers = group.getMembers();
@@ -236,9 +234,9 @@ public class UserController {
         return "profile";  
     }
 
-    @PostMapping("/{groupID}/profile/{name}/update")
+    @PostMapping("/group/{groupID}/profile/{name}/update")
     public String updateProfile(@PathVariable String groupID, @PathVariable String name,
-                                @RequestParam String wishlist, Model model) {
+                                @RequestParam String interests, Model model) {
 
         // Get the group
         Group group = grpSvc.getGroupById(groupID);
@@ -254,7 +252,7 @@ public class UserController {
         }
 
         if (member != null) {
-            member.setWishlist(wishlist);  // Set the wishlist for the member
+            member.setInterests(interests);  
             grpSvc.updateGroup(group);  // Save updated group
             model.addAttribute("group", group);
             model.addAttribute("member", member);

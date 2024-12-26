@@ -8,7 +8,6 @@
 <body>
     <h1>Group Details</h1>
 
-    <!-- Display Group Information -->
     <p><strong>Group ID:</strong> <span data-th-text="${group.groupID}"></span></p>
     <p><strong>Theme:</strong> <span data-th-text="${group.theme}"></span></p>
     <p><strong>Event Date:</strong> <span data-th-text="${group.eventDate}"></span></p>
@@ -16,13 +15,13 @@
     <h2>Members List:</h2>
     <ul>
         <li data-th-each="member : ${group.members}">
-            <p data-th-text="${member.name}">Member Name</p>
-            <p><strong>Secret Santa:</strong> <span data-th-text="${member.secretsanta}">Secret Santa Name</span></p>
+            <p><strong>Member name:</strong> <span data-th-text="${member.name}"></span></p>
+            <p><strong>Event Planner:</strong> <span data-th-text="${member.eventPlanner}"></span></p>
         </li>
     </ul>
 
     <!-- Button to Shuffle the List -->
-    <form th:action="@{'/' + ${group.groupID} + '/shuffle'}" method="post">
+    <form data-th-action="@{/getgroup/{groupID}/shuffle (groupID=${group.groupID})}" method="POST">
         <button type="submit">Shuffle Members</button>
     </form>
 

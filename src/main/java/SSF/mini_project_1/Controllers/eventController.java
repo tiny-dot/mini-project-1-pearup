@@ -38,8 +38,6 @@ public class eventController {
         eventSearch es = new eventSearch(keyword, locale);
         System.out.println("Received keyword: " + keyword + ", locale: " + locale);  // Log the parameters
 
-
-
         List<Events> eventList = eventSvc.getEvents(es);
 
         mav.setViewName("search");

@@ -4,7 +4,7 @@ public class Events {
     private String name;
     private String type;
     private String eventURL;
-    //see if want images later
+   
     public String getName() {
         return name;
     }

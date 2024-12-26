@@ -60,10 +60,10 @@ public class GroupRepository {
             JsonObjectBuilder jBuilder=Json.createObjectBuilder();
             if(member.getName()!=null){
                 jBuilder.add("name", member.getName());}
-            if(member.getWishlist()!=null){
-                jBuilder.add("wishlist",member.getWishlist());}
-            if(member.getSecretsanta()!=null){
-                jBuilder.add("secretsanta", member.getSecretsanta());}
+            if(member.getInterests()!=null){
+                jBuilder.add("interests",member.getInterests());}
+            if(member.getEventPlanner()!=null){
+                jBuilder.add("eventPlanner", member.getEventPlanner());}
 
             //convert java object to json object
             JsonObject memberInJson = jBuilder.build();
@@ -115,18 +115,18 @@ public class GroupRepository {
                     javaMember.setName(null); // Set to null if the key does not exist
                 }
     
-                // Check if 'wishlist' exists in JSON object and set it
-                if (jobject.containsKey("wishlist")) {
-                    javaMember.setWishlist(jobject.getString("wishlist"));
+                // Check if 'interests' exists in JSON object and set it
+                if (jobject.containsKey("interests")) {
+                    javaMember.setInterests(jobject.getString("interests"));
                 } else {
-                    javaMember.setWishlist(null); // Set to null if the key does not exist
+                    javaMember.setInterests(null); // Set to null if the key does not exist
                 }
     
                 // Check if 'secretsanta' exists in JSON object and set it
-                if (jobject.containsKey("secretsanta")) {
-                    javaMember.setSecretsanta(jobject.getString("secretsanta"));
+                if (jobject.containsKey("eventPlanner")) {
+                    javaMember.setEventPlanner(jobject.getString("eventPlanner"));
                 } else {
-                    javaMember.setSecretsanta(null); // Set to null if the key does not exist
+                    javaMember.setEventPlanner(null); // Set to null if the key does not exist
                 }
     
 
@@ -165,11 +165,11 @@ public class GroupRepository {
                     if (member.getName() != null) {
                         jBuilder.add("name", member.getName());
                     }
-                    if (member.getWishlist() != null) {
-                        jBuilder.add("wishlist", member.getWishlist());
+                    if (member.getInterests() != null) {
+                        jBuilder.add("interests", member.getInterests());
                     }
-                    if (member.getSecretsanta() != null) {
-                        jBuilder.add("secretsanta", member.getSecretsanta());
+                    if (member.getEventPlanner() != null) {
+                        jBuilder.add("eventPlanner", member.getEventPlanner());
                     }
                     
                     // Convert member to JSON string

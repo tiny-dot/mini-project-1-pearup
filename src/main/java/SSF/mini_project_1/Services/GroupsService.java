@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -45,7 +46,7 @@ public class GroupsService {
             
             //get the members by the name and add to member list
             if (group.getMembers() == null) {
-                group.setMembers(new ArrayList<>());
+                group.setMembers(new LinkedList<>());
             }
             group.getMembers().add(member);
 
@@ -63,18 +64,16 @@ public class GroupsService {
     }
 
     //members update wishlist
-    public void updateWishlist(String groupID, String name, String wishlist){
+    public void updateInterest(String groupID, String name, String interest){
         try{
             //get group
             Group group = grpRepo.getGroupByID(groupID);
 
-            //get name
-            //Member indiv = new Member();
-            //update wishlist
+            
             for (Member m:group.getMembers()){
                 if(m.getName().equals(name)){
                     //allow updating
-                    m.setWishlist(wishlist);
+                    m.setInterests(interest);
                     //save to redis
                     grpRepo.saveGroup(group);
                     break;
@@ -97,23 +96,6 @@ public class GroupsService {
                 break;
             }
         }
-        grpRepo.saveGroup(group);
-    }
-    // Shuffle the members and assign Secret Santa - in controller now, to remove
-    public void shuffleSecretSanta(Group group) {
-        List<Member> members = group.getMembers();
-
-        // Shuffle members randomly
-        Collections.shuffle(members);
-
-        // Assign Secret Santa (member i gives a gift to member (i+1) % n)
-        for (int i = 0; i < members.size(); i++) {
-            Member giver = members.get(i);
-            Member receiver = members.get((i + 1) % members.size());  // next member in the list
-            giver.setSecretsanta(receiver.getName());  // Assign the secret santa
-        }
-
-        // Save the updated group to Redis
         grpRepo.saveGroup(group);
     }
 }

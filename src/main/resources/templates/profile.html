@@ -8,28 +8,30 @@
 <body>
     <h1>Member Profile</h1>
 
-    <div th:if="${member != null}">
+    <div data-th-if="${member != null}">
         <p><strong>Name:</strong> <span data-th-text="${member.name}">Name</span></p>
         <p><strong>Group ID:</strong> <span data-th-text="${groupID}">Group ID</span></p>
-        <p><strong>Wishlist:</strong> <span data-th-text="${member.wishlist}">Wishlist</span></p>
+        <p><strong>Interests:</strong> <span data-th-text="${member.interests}">Interests</span></p>
         
-        <!-- Display Secret Santa -->
-        <p><strong>Secret Santa:</strong></p>
-        <span data-th-if="${member.secretsanta != null}" data-th-text="${member.secretsanta}">
-            Secret Santa
+
+        <p><strong>Event Planner:</strong>
+        <span data-th-if="${member.eventPlanner != null}" data-th-text="${member.eventPlanner}">
+            Event Planner
         </span>
-        <span data-th-if="${member.secretsanta == null}">
+        <span data-th-if="${member.eventPlanner == null}">
             Not assigned yet
         </span>
+        </p>
     </div>
 
     <div data-th-if="${member != null}">
-        <form th:action="@{'/' + ${groupID} + '/profile/' + ${member.name} + '/update'}" method="post">
-            <label for="wishlist">Update Wishlist:</label>
-            <textarea id="wishlist" name="wishlist" rows="5" cols="30"
-                      data-th-text="${member.wishlist}"></textarea>
+        
+        <form data-th-action="@{/group/{groupID}/profile/{name}/update(groupID=${groupID}, name=${member.name})}" method="POST">
+            <label for="interests">Update Interests:</label>
+            <input type="text" name="interests">
             <button type="submit">Update</button>
         </form>
+
     </div>
 
     <div data-th-if="${member == null}">
