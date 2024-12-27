@@ -54,6 +54,9 @@ public class GroupRepository {
         if(members==null){
             members=new LinkedList<>();
             group.setMembers(members);
+        } else {
+            template.delete(membersKey);
+
         }
         for(Member member: members){
             //handle nulls
@@ -153,11 +156,17 @@ public class GroupRepository {
 
             // Update members list (handle new member addition or removal)
             String membersKey = group.getGroupID() + "member";
+            System.out.println(membersKey);
             List<Member> members = group.getMembers();
+            System.out.println(members.toString() + "here");
             
             if (members != null) {
                 // Clear existing members in Redis
-                listOps.getOperations().delete(membersKey);
+                System.out.println(template.opsForList().range(membersKey, 0, -1));
+                template.delete(membersKey);
+                System.out.println(template.opsForList().range(membersKey, 0, -1));
+
+
                 
                 // Save updated members list
                 for (Member member : members) {

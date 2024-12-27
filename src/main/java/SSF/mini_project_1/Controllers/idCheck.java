@@ -17,20 +17,18 @@ public class idCheck {
     @Autowired GroupsService grpSvc;
 
     //for groupID not available errors - return w error codes if available or not
-    @GetMapping(path="/joinGroup/exists", produces=MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> checkUserName(@RequestParam String groupID, String name){
+    @GetMapping(path="/joinGroup/{groupID}", produces=MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<String> checkgroupID(@RequestParam String groupID){
         
 
         if(grpSvc.checkID(groupID)){
             String existing = "exists";
             return ResponseEntity.ok(existing);
         } else {
-            String noGroup = "invalid groupID";
+            String noGroup = "groupID doesn't exist";
             return ResponseEntity.badRequest().body(noGroup);
         }
     }
-
-    
 }
 
 
