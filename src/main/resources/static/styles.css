@@ -1,64 +1,284 @@
+
 h1{
-    color:black;
     text-align: center;
-    background-color:aliceblue;
-    font-family: DM Sans;
-    height: 100px;
-    line-height: 100px;
-    /* add image here if hv time */
+    font-family: "Varela Round", serif;
+    font-weight: 400;
+    font-style: normal;
+    /*background-color: aliceblue;*/
+    /* add image here if hv time */ 
 }
 
+h3{
+    text-align: center;
+    font-family: "Varela Round", serif;
+    font-weight: 400;
+    font-style: normal;
+
+}
+/* lighter colour: #FAFDF3*/
 body{
-    background-color:#FAFDF3 ;
-}
-
-h6{
-    color:black;
+    /*background-color: #A3B8C0;*/
     text-align: center;
-    background-color:aliceblue;
-    font-family: DM Sans;
-    height: 50px;
-    line-height: 50px;
-    
+    font-family: "Varela Round", serif;
+    font-weight: 400;
+    font-style: normal;
+    background-image: url("background.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh;
+    margin:0;
 }
-
 
 
 .flex-container-main{
     display: flex;
     justify-content: center;
     gap: 20px;
-    align-items: stretch;
-
+    align-items: center;
     
 }
 
 .flex-container{
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: medium;
+    font-family: "Varela Round", serif;
     display: flex;
+    flex-direction: column;
     justify-content: center;
-    border:2px solid aliceblue;
+    border:2px solid transparent;
     padding: 50px;
-    width: auto;
+    width: 40%;
     height: auto;
     flex-wrap: wrap;
-    border-radius:25px;
-    background-color: aliceblue;
+    border-radius:15px;
+    background-color: #f7fadb;
+    margin-left:5%;
+    gap: 20px;
+}
+
+.flex-container button{
+    font-family: "Varela Round", serif;
+    font-size: 16px;
+    padding: 15px 30px;
+    border: 2px solid transparent;
+    border-radius: 15px;
+    letter-spacing: 1px;
+    background-color: #cde8b5;
+    width:100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    white-space: nowrap;
+
+}
+
+.flex-container button.btn-outline-primary:hover {
+    border-color:#D1E17D;  /* supposed to be pear coloured but idk*/
+}
+
+.flex-container button a{
+    color:black;
+    font-family: "Varela Round", serif;
+    
 }
 
 .container {
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: "Varela Round", serif;
     font-size: medium;
     font-weight: 300;
     text-align:center;
     border-radius: 25px;
-    border:2px solid aliceblue;
+    border:2px solid transparent;
+    background-color: #f7fadb;
     padding: 20px;
     width: 50%;
     height: auto;
-    margin: 0 auto;
+    margin: 0;
+    margin-left: 5%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+input {
+    border: 1px solid black;
+    border-radius:10px;
+    padding: 8px;
+    width: 200px;
+    font-size: 14px;
+    text-align: center;
+}
+
+input:focus{
+    background-color: aliceblue;
+}
+
+.btn{
+    border-radius: 5px;
+    font-family: "Varela Round", serif;
+    font-size: small;
+    color: black;
+}
+
+.btn:hover{
+    background-color: lightblue;
+    color: azure;
+}
+
+td{
+    font-family: "Varela Round", serif;
+    font-weight: 200;
+    font-style: normal;
+}
+
+.groupID-page {
+    width: 45%; /* Adjust width as needed */
+    margin: 0; /* Remove centering */
+    margin-left: 10%; /* Shift the container 10% from the left edge */
+    padding: 20px; /* Add some padding */
+    font-family: "Varela Round", serif;
+    font-size: medium;
+    font-weight: 400;
+    border-radius: 10px; 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/*
+.gid{
+    font-family: "Varela Round", serif;
+    font-size:20px;
+    font-weight: bold;
+    background-color: lightcoral;
+}
+    */
+
+.gid {
+    position: relative;
+    font-size: 20px;
+    font-weight: bold;
+    display: inline-block;
+    color: darkgreen;
+    background: linear-gradient(90deg, transparent 35%, #f7fadb 65%);
+    background-size: 200% 100%;
+    background-position: -100% 0;
+    padding: 0.3rem; /* Adjust as needed */
+    transition: background-position 1.0s ease-in-out;
+
+}
+
+.gid:hover{
+    background-position: 30% 0;
+}
+
+.container-btn{
+    display: flex;
+    justify-content: center; /* Centers the button horizontally */
+    margin-top: 20px;
+}
+
+.home-btn {
+    position: relative;
+    display: inline-block;
+    background-color: #D1E17D; /* Pear-like color */
+    border: none;
+    padding: 10px 15px; /* Adjust padding to control size */
+    font-size: 9px;
+    color: black;
+    border-radius: 50%; /* Makes the button rounded */
+    width: 80px; /* Set a width to control the shape */
+    height: 80px; /* Adjust the height to elongate */
+    text-align: center;
+    overflow: hidden;
+}
+
+.home-btn a {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 
+.nav-link img {
+    height: 55px;
+    width: auto;
+    object-fit: contain;
+    background-color: #f7fadb;
+}
 
+.nav{
+    display: flex;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+}
+.nav-link {
+    display: flex;
+    align-items: center;      
+    height: 55px;             
+    line-height: 50px;        
+    font-size: 16px;   
+    background-color: #f7fadb;   
+    transition: background-color 0.3s ease;    
+}
+
+.nav-link.active{
+    background-color: #f7fadb;
+}
+
+.flex-container{
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.form-container{
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.profile{
+    text-align: left;
+}
+
+.table {
+    text-align: center;
+    padding: 12px;
+    font-size: 16px;
+}
+
+.table th{
+    background-color: #cde8b5;
+    color: darkgreen;
+    font-size: 18px;
+}
+
+.table td{
+    background-color: #f7fadb;
+}
+
+.table a.event-link {
+    color: #6f7b47;
+    text-decoration: none;
+}
+
+.table a.event-link:hover {
+    text-decoration: underline;
+    color: #3e4e27; 
+}
+
+.keyword {
+    color: darkgreen;
+    text-decoration: underline;
+    background-color: #cde8b5;
+}
