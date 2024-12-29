@@ -5,7 +5,6 @@ h1{
     font-weight: 700;
     font-style: normal;
     color: darkgreen;
-    
 }
 
 h2{
@@ -26,9 +25,8 @@ h3{
     color:darkgreen;
 
 }
-/* lighter colour: #FAFDF3*/
+
 body{
-    /*background-color: #A3B8C0;*/
     text-align: center;
     font-family: "Varela Round", serif;
     font-weight: 400;
@@ -42,7 +40,7 @@ body{
 }
 
 .error{
-    color: #9A6735;/*a94442 */
+    color: #9A6735;
     font-size:10px;
     font-style:italic;
 
@@ -69,13 +67,6 @@ body{
 }
 
 
-.flex-container-main{
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    align-items: center;
-    
-}
 
 .flex-container{
     font-family: "Varela Round", serif;
@@ -109,15 +100,14 @@ body{
 
 }
 
-/*
-.flex-container button.btn-outline-primary:hover {
-    border-color:#D1E17D;  /* supposed to be pear coloured but idk*/
+
 
 .flex-container button a{
     color:black;
     font-family: "Varela Round", serif;
     
 }
+
 
 .container {
     font-family: "Varela Round", serif;
@@ -147,9 +137,12 @@ input {
     text-align: center;
 }
 
+
 input:focus{
     background-color: aliceblue;
 }
+
+*/
 
 .btn{
     border-radius: 5px;
@@ -165,10 +158,10 @@ input:focus{
 
 
 .groupID-page {
-    width: 45%; /* Adjust width as needed */
-    margin: 0; /* Remove centering */
-    margin-left: 10%; /* Shift the container 10% from the left edge */
-    padding: 20px; /* Add some padding */
+    width: 45%; 
+    margin: 0; 
+    margin-left: 10%; 
+    padding: 20px; 
     font-family: "Varela Round", serif;
     font-size: medium;
     font-weight: 400;
@@ -228,14 +221,14 @@ input:focus{
     align-items: center;
 }
 
-
+/*nav bar*/
 .nav{
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 0;
     margin: 0;
-    background-color: #f7fadb;;
+    background-color: #f7fadb;
     border-radius: 15px;
 
 }
@@ -292,13 +285,6 @@ input:focus{
 
 
 
-.flex-container{
-    margin-top: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-}
 
 .form-container{
     margin-top: 20px;
@@ -312,7 +298,8 @@ input:focus{
 .container strong {
     color:#55663a;
     font-weight: bold; 
-    background-color: #f5f1e3;
+    background-color: #f2f9f1;
+  
     border-radius: 5px;;
     letter-spacing: 0.5px; /* Add slight letter spacing */
     font-size: 1.1rem; /* Slightly larger font size */
@@ -373,7 +360,13 @@ td{
 }
 
 .keyword {
-    color: darkgreen;
+    color: #6f7b47;
     text-decoration: underline;
     background-color: #cde8b5;
+}
+
+.success {
+    font-weight: bold;
+    font-size: larger;
+    font-style: italic;
 }

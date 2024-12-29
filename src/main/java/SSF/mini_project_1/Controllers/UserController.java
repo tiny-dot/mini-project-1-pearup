@@ -5,8 +5,6 @@ import java.util.LinkedList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.MultiValueMap;
@@ -19,13 +17,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 
 import SSF.mini_project_1.Models.Group;
 import SSF.mini_project_1.Models.Member;
 import SSF.mini_project_1.Services.GroupsService;
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.PositiveOrZero;
 
 
 @Controller
@@ -61,9 +57,9 @@ public class UserController {
         }
                    
 
-        System.out.println(group.toString());
+        //System.out.println(group.toString());
         String groupID = grpSvc.createGroup(group);
-        System.out.println(groupID);
+        //System.out.println(groupID);
         model.addAttribute("groupID", groupID);
         model.addAttribute("group", group);
        
@@ -82,14 +78,6 @@ public class UserController {
         return "leadersPage";  
     }
     
-    // @GetMapping("/{groupID}")
-    // public String leadersPage(@PathVariable String groupID, Model model) {
-    //     // Get the group by ID
-    //     Group group = grpSvc.getGroupById(groupID);
-
-    //     model.addAttribute("group", group);  
-    //     return "leadersPage";  
-    // }
 
     //shuffle
     @PostMapping("/getgroup/{groupID}/shuffle")
@@ -125,39 +113,6 @@ public class UserController {
     }
 
    
-    //shuffle and assign pairs
-    // @PostMapping("getgroup/{groupID}/shuffle")
-    // public String shuffleMembers(@PathVariable String groupID, Model model){
-    //     Group group = grpSvc.getGroupById(groupID);
-
-    //     List<Member> ogMembers = group.getMembers();
-    //     Collections.shuffle(ogMembers);
-
-    //     //to make sure they dont get themselves
-    //     List<Member> shuffledMembers=new LinkedList<>(ogMembers); //create new list
-
-    //     //assign pairs
-    //     for(int i=0;i<ogMembers.size();i++){
-    //         Member santa = ogMembers.get(i);
-    //         Member receiver = shuffledMembers.get(i);
-
-    //         if(santa.equals(receiver)){
-    //             Collections.shuffle(shuffledMembers);  
-    //             i=-1;
-    //             continue;
-        
-    //         } else {
-    //             //assign santa
-    //             santa.setSecretsanta(receiver.getName());
-    //         }
-    //     }
-
-    //     grpSvc.updateGroup(group);
-
-    //     model.addAttribute("group", group);
-    //     return "leadersPage";
-    // }
-
 
     /*--------------------------JOIN EXISTING GROUP------------------------------- */
     @GetMapping("/joinGroup")
@@ -221,13 +176,10 @@ public class UserController {
             }
         }
 
-        // if(member == null){
-        //     model.addAttribute("error", "Member not found");
-        //     return "member-not-found";}
+
         //bind to model
         model.addAttribute("groupID", groupID);
         model.addAttribute("member", member);
-        //model.addAttribute("secretsanta", member.getSecretsanta());
         
         return "profile";  
     }

@@ -1,13 +1,6 @@
 package SSF.mini_project_1.Services;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Date;
 import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,47 +56,9 @@ public class GroupsService {
         grpRepo.updateGroup(group);
     }
 
-    //members update wishlist
-    public void updateInterest(String groupID, String name, String interest){
-        try{
-            //get group
-            Group group = grpRepo.getGroupByID(groupID);
-
-            
-            for (Member m:group.getMembers()){
-                if(m.getName().equals(name)){
-                    //allow updating
-                    m.setInterests(interest);
-                    //save to redis
-                    grpRepo.saveGroup(group);
-                    break;
-                }
-            }
-
-        } catch (Exception e){e.printStackTrace();}
-    }
-
-   
-    //update secret santa
-    public void updateSecretsanta(String groupID, String name, String secretsanta) {
-        Group group = grpRepo.getGroupByID(groupID);
-        
-        Member member = null;
-        for (Member m : group.getMembers()) {
-            if (m.getName().equals(name)) {
-                member=m;
-                // m.setSecretsanta(secretsanta);
-                break;
-            }
-        }
-        grpRepo.saveGroup(group);
-    }
-
     //groupID dont exist
     public boolean checkID(String groupID){
-        if(grpRepo.checkID(groupID)){
-            return true;
-        } return false;
+        return grpRepo.checkID(groupID);
     }
 }
 

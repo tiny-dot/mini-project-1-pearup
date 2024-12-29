@@ -192,16 +192,9 @@ public class GroupRepository {
         }
 
 
-    // // Optionally add a method to add a single member to the group
-    // public void addMemberToGroup(String groupID, String memberName) {
-    //     String membersKey = groupID + "members";
-    //     ListOperations<String, Object> listOps = template.opsForList();
-    //     listOps.rightPush(groupID, memberName);  // Add member to the list
-    // }
-
     }
 
-    //check member existence
+    //check groupID existence
     public boolean checkID(String groupID){
         HashOperations<String, String, Object> hashOps = template.opsForHash();
         return template.hasKey(groupID);
