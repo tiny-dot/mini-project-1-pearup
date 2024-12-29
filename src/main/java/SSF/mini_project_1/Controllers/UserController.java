@@ -54,10 +54,8 @@ public class UserController {
 
         if(bindings.hasErrors()){
             FieldError nameError = new FieldError("group", "theme", "Please include a theme");
-            FieldError dateError = new FieldError("group", "eventDate", "Date must be in the future");
-        
+            
             bindings.addError(nameError);
-            bindings.addError(dateError);
 
             return "createGroup";
         }

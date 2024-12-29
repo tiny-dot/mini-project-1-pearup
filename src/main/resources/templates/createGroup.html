@@ -14,25 +14,24 @@
 
 <body>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <ul class="nav nav-tabs">
+
+    <ul class="nav nav-pills nav-fill">
         <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="/">
+            <a class="nav-link-logo" aria-current="page" href="/">
               <img src="/logo.png">
             </a>
           </li>
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="/createGroup">Leader</a>
+          <a class="nav-link active" aria-current="page" href="/createGroup">Leaders</a>
         </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">more</a>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="/createGroup">See the main group</a></li>
-            <li><a class="dropdown-item" href="/joinGroup">Join a group</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="/searchForm">Get Event Ideas</a></li>
-          </ul>
+        <li class="nav-item">
+          <a class="nav-link" href="/joinGroup">Members</a>
         </li>
-    </ul>
+        <li class="nav-item">
+          <a class="nav-link" href="/searchForm">Event Ideas</a>
+        </li>
+
+      </ul>
    
     <br><br><br>
 
@@ -45,7 +44,7 @@
                     <td>
                         <div class="input-group input-group-sm mb-3">
                             <span class="input-group-text" id="inputGroup-sizing-sm">Theme</span>
-                            <input type="text" name="theme" class="form-control" aria-label="Theme" aria-describedby="inputGroup-sizing-sm" data-th-field="*{theme}">
+                            <input type="text" name="theme" class="form-control" aria-label="theme" aria-describedby="inputGroup-sizing-sm" data-th-field="*{theme}">
                         </div>
                     </td>
                     <td>
@@ -57,7 +56,7 @@
                     <td>
                         <div class="input-group input-group-sm mb-3">
                             <span class="input-group-text" id="inputGroup-sizing-sm">Event Date</span>
-                            <input type="date" name="date" class="form-control" aria-label="Theme" aria-describedby="inputGroup-sizing-sm" data-th-field="*{eventDate}">
+                            <input type="date" name="date" class="form-control" aria-label="date" aria-describedby="inputGroup-sizing-sm" data-th-field="*{eventDate}">
                         </div>
                     </td>
                     <td>

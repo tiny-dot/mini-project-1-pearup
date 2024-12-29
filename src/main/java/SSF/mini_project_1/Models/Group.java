@@ -14,11 +14,12 @@ import jakarta.validation.constraints.Size;
 public class Group {
     private String groupID;
 
-    @NotNull (message = "please enter a theme")
+    @NotNull (message = "Please enter a theme")
     private String theme;
 
+    @NotNull (message="Please enter a date")
     @DateTimeFormat(pattern="yyyy-MM-dd")
-    @FutureOrPresent
+    @FutureOrPresent (message="Date should be in the future")
     private Date eventDate;
     
     private List<Member> members;

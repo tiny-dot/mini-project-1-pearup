@@ -2,17 +2,28 @@
 h1{
     text-align: center;
     font-family: "Varela Round", serif;
+    font-weight: 700;
+    font-style: normal;
+    color: darkgreen;
+    
+}
+
+h2{
+    text-align: center;
+    font-family: "Varela Round", serif;
     font-weight: 400;
     font-style: normal;
-    /*background-color: aliceblue;*/
-    /* add image here if hv time */ 
+    background-color: #cde8b5;
+    color:darkgreen;
 }
+
 
 h3{
     text-align: center;
     font-family: "Varela Round", serif;
     font-weight: 400;
     font-style: normal;
+    color:darkgreen;
 
 }
 /* lighter colour: #FAFDF3*/
@@ -28,6 +39,33 @@ body{
     background-repeat: no-repeat;
     height: 100vh;
     margin:0;
+}
+
+.error{
+    color: #9A6735;/*a94442 */
+    font-size:10px;
+    font-style:italic;
+
+}
+
+.container-landing{
+    font-family: "Varela Round", serif;
+    color:#3e4e27;
+    font-size: medium;
+    font-weight: 300;
+    text-align:center;
+    border-radius: 25px;
+    border:2px solid transparent;
+    padding: 20px;
+    width: 45%;
+    height: auto;
+    margin: 0;
+    margin-left: 5%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
 }
 
 
@@ -46,7 +84,7 @@ body{
     justify-content: center;
     border:2px solid transparent;
     padding: 50px;
-    width: 40%;
+    width: 45%;
     height: auto;
     flex-wrap: wrap;
     border-radius:15px;
@@ -71,9 +109,9 @@ body{
 
 }
 
+/*
 .flex-container button.btn-outline-primary:hover {
     border-color:#D1E17D;  /* supposed to be pear coloured but idk*/
-}
 
 .flex-container button a{
     color:black;
@@ -86,12 +124,12 @@ body{
     font-size: medium;
     font-weight: 300;
     text-align:center;
-    border-radius: 25px;
+    border-radius: 25px; /*25px 50%*/
     border:2px solid transparent;
     background-color: #f7fadb;
     padding: 20px;
-    width: 50%;
-    height: auto;
+    width: 45%; /*45% 400px*/
+    height: auto; /*auto 400px*/
     margin: 0;
     margin-left: 5%;
     display: flex;
@@ -125,11 +163,6 @@ input:focus{
     color: azure;
 }
 
-td{
-    font-family: "Varela Round", serif;
-    font-weight: 200;
-    font-style: normal;
-}
 
 .groupID-page {
     width: 45%; /* Adjust width as needed */
@@ -143,14 +176,7 @@ td{
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-/*
-.gid{
-    font-family: "Varela Round", serif;
-    font-size:20px;
-    font-weight: bold;
-    background-color: lightcoral;
-}
-    */
+
 
 .gid {
     position: relative;
@@ -172,21 +198,21 @@ td{
 
 .container-btn{
     display: flex;
-    justify-content: center; /* Centers the button horizontally */
+    justify-content: center;
     margin-top: 20px;
 }
 
 .home-btn {
     position: relative;
     display: inline-block;
-    background-color: #D1E17D; /* Pear-like color */
+    background-color: #D1E17D; 
     border: none;
-    padding: 10px 15px; /* Adjust padding to control size */
+    padding: 10px 15px; 
     font-size: 9px;
     color: black;
-    border-radius: 50%; /* Makes the button rounded */
-    width: 80px; /* Set a width to control the shape */
-    height: 80px; /* Adjust the height to elongate */
+    border-radius: 50%; 
+    width: 80px; 
+    height: 80px; 
     text-align: center;
     overflow: hidden;
 }
@@ -203,32 +229,68 @@ td{
 }
 
 
-.nav-link img {
-    height: 55px;
-    width: auto;
-    object-fit: contain;
-    background-color: #f7fadb;
-}
-
 .nav{
     display: flex;
+    justify-content: center;
     align-items: center;
     padding: 0;
     margin: 0;
+    background-color: #f7fadb;;
+    border-radius: 15px;
+
 }
 .nav-link {
     display: flex;
+    justify-content: center;
     align-items: center;      
     height: 55px;             
     line-height: 50px;        
     font-size: 16px;   
-    background-color: #f7fadb;   
-    transition: background-color 0.3s ease;    
+    background-color: transparent; 
+    transition: background-color 0.3s;  
+    color: darkgreen;
+    padding: 10px 20px;
+    font-weight: 500;
+
 }
 
-.nav-link.active{
-    background-color: #f7fadb;
+.nav-link-logo {
+    display: flex;
+    justify-content: left;
+    align-items: left;      
+    height: 55px;             
+    line-height: 50px;        
+    font-size: 16px;   
+    background-color: transparent; 
+    transition: background-color 0.3s;  
+    color: darkgreen;
+    padding: 10px 20px;
+    font-weight: 500;
+
 }
+
+.nav-link-logo img {
+    height: 60px; 
+    width: auto;
+    object-fit: cover;
+    background-color: transparent;
+    outline: none ;
+    border: none;
+
+}
+
+
+/*for active page*/
+.nav-link.active{
+    background-color: #829e6b !important;
+}
+
+.nav-link:hover {
+    background-color: #829e6b; 
+    color: #F7FADB; 
+}
+
+
 
 .flex-container{
     margin-top: 20px;
@@ -247,6 +309,16 @@ td{
     gap: 10px;
 }
 
+.container strong {
+    color:#55663a;
+    font-weight: bold; 
+    background-color: #f5f1e3;
+    border-radius: 5px;;
+    letter-spacing: 0.5px; /* Add slight letter spacing */
+    font-size: 1.1rem; /* Slightly larger font size */
+}
+
+
 .profile{
     text-align: left;
 }
@@ -255,6 +327,14 @@ td{
     text-align: center;
     padding: 12px;
     font-size: 16px;
+    /* new added*/
+    width: 80%;
+    margin: 20px auto;
+    border-radius: 10px;
+    border: 2px dotted f7fadb;
+    box-shadow: 0 2px 8px;
+    
+
 }
 
 .table th{
@@ -265,6 +345,15 @@ td{
 
 .table td{
     background-color: #f7fadb;
+    padding: 10px;
+    text-align: center;
+    font-size: medium;
+    border-bottom: 1px solid #cde8b5;
+}
+
+.table td.td-event{
+    background-color: #f1f9d1;
+
 }
 
 .table a.event-link {
@@ -275,6 +364,12 @@ td{
 .table a.event-link:hover {
     text-decoration: underline;
     color: #3e4e27; 
+}
+
+td{
+    font-family: "Varela Round", serif;
+    font-weight: 200;
+    font-style: normal;
 }
 
 .keyword {
